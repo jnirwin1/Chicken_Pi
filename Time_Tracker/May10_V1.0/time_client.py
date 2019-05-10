@@ -26,17 +26,16 @@ if __name__ == "__main__":
      
     try:
         client.connect()
-        client.load_type_definitions()
-        time_node = client.get_node("ns=2;s=Tags."+PLC_DT)
-        header = time_node.get_browse_name().to_string()
+        nodes = []
+
+        nodes = [client.get_node("ns=2;s=Tags."+ tag) for tag in Node_Tags]
+       
+        header = [node.get_browse_name().to_string() for node in nodes]
 
         while True:
-            current_time = datetime.datetime.utcfromtimestamp(time_node.get_value())
-            print(current_time)
-            dataRow = [current_time]
+            dataRow = [node.get_value for node in nodes]
             write_csv(dataRow,header)
             time.sleep(1)
-
 
     finally:
         client.disconnect()

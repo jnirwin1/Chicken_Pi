@@ -2,4 +2,6 @@
 
 HMI_IP = "192.168.1.35"
 
-PLC_DT = "PLC//PLC_Time/DT_Now"
+
+Node_Tags = ["PLC//PLC_Time/DT_Now","PLC//Probe_Zone/AVG_Temp"]
+
