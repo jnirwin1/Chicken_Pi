@@ -6,15 +6,14 @@ import os.path
 from Config import *
 
 
-def write_csv(data):
-    csv_header = ['Temperature', 'Pressure', 'Wave', 'Time']
+def write_csv(row, header):
     data_file = "opcData.csv"
     file_exists = os.path.isfile(data_file)
     with open(data_file, 'a') as csv_file:
         writer = csv.writer(csv_file)
         if not file_exists:
-            writer.writerow(csv_header)
-        writer.writerow(data)
+            writer.writerow(cheader)
+        writer.writerow(row)
 
 
 
@@ -39,27 +38,3 @@ if __name__ == "__main__":
 
     finally:
         client.disconnect()
-
-
-
-
-""" while True:
-    Temp = client.get_node("ns=2; i=3")
-    Press = client.get_node("ns=2; i=4")
-    Time = client.get_node("ns=2; i=5")
-    Wave = client.get_node("ns=2; i=6")
-
-    Temperature = Temp.get_value()
-    Pressure = Press.get_value()
-    currTime = Time.get_value()
-    waveFunc = Decimal(Wave.get_value())
-
-    print("The temperature is: ", Temperature)
-    print("The pressure is: ", Pressure)
-    print("The time is: ", currTime)
-    print("The wave is: ", waveFunc)
-
-    dataRow = [Temperature, Pressure, round(waveFunc, 4), currTime]
-    write_csv(dataRow)
-
-    time.sleep(1) """
