@@ -4,6 +4,7 @@ import time
 import csv
 import os.path
 from Config import *
+import datetime
 
 
 def write_csv(row, header):
@@ -27,12 +28,13 @@ if __name__ == "__main__":
         client.connect()
         client.load_type_definitions()
         time_node = client.get_node("ns=2;s=Tags."+PLC_DT)
-
+        header = time_node.get_browse_name().to_string()
 
         while True:
-            print(time_node.get_description())
-            print(time_node.get_browse_name())
-            print(time_node.get_value())
+            current_time = datetime.datetime.utcfromtimestamp(time_node.get_value())
+            print(current_time)
+            dataRow = [current_time]
+            write_csv(dataRow,header)
             time.sleep(1)
 
 
