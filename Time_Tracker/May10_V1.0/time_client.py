@@ -12,7 +12,7 @@ def write_csv(row, header):
     with open(data_file, 'a') as csv_file:
         writer = csv.writer(csv_file)
         if not file_exists:
-            writer.writerow(cheader)
+            writer.writerow(header)
         writer.writerow(row)
 
 
