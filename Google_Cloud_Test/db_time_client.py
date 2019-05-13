@@ -35,9 +35,10 @@ if __name__ == '__main__':
        
 
         while True:
-            dataRow = [node.get_value for node in nodes]
-            time = datetime.fromtimestamp(dataRow[0].get_value())
+            dataRow = [node.get_value() for node in nodes]
+            time = datetime.fromtimestamp(dataRow[0])
             insert_time(time)
+            print(time)
             time.sleep(1)
 
     finally:
